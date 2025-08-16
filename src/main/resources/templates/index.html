@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student ID Card Generator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
+    <a class="navbar-brand" href="#">IDGen</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Docs</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            <li class="nav-item"><a class="btn btn-dark ms-2" href="/loginPage">Login</a></li>
+            <li class="nav-item"><a class="btn btn-outline-danger ms-2" href="/registerPage">Register</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="container hero-section">
+    <div class="row align-items-center">
+        <!-- Text Content -->
+        <div class="col-md-6">
+            <h1 class="hero-title">Bulk Generate Student ID Cards</h1>
+            <p class="hero-subtitle">
+                Upload Excel files and images, and automatically create stylish ID cards for all your students in seconds. Built for schools, colleges, and training institutes.
+            </p>
+            <a href="/registerPage" class="cta-btn">Get Started</a>
+        </div>
+
+        <!-- Image Box -->
+        <div class="col-md-6 mt-4 mt-md-0">
+            <div class="image-card shadow">
+                <img th:src="@{/images/sample-id-card.jpg}" alt="Student ID Card Preview">
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

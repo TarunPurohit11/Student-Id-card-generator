@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student ID Cards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/generate.css}">
+
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center my-4">Generated Student ID Cards</h2>
+
+    <div class="card-container">
+        <div class="id-card" th:each="student : ${studentPage.content}">
+            <div class="card-header">
+                <span th:text="${schoolName}">School Name</span>
+            </div>
+
+            <div class="photo-section">
+                <img th:src="@{${student.studentPicturePath}}" alt="Student Photo" />
+            </div>
+
+            <div class="info-section">
+                <div><span class="label">Name:</span> <span class="value" th:text="${student.getStudentName}">Name</span></div>
+                <div><span class="label">Roll No:</span> <span class="value" th:text="${student.getRollNo}">Roll</span></div>
+                <div><span class="label">Class:</span> <span class="value" th:text="${student.getStandard}">Class</span></div>
+                <div><span class="label">DOB:</span> <span class="value" th:text="${student.getDob}">DOB</span></div>
+                <div><span class="label">Session:</span> <span class="value" th:text="${student.getCurrent_session}">Session</span></div>
+                <div><span class="label">Address:</span> <span class="value" th:text="${student.getStudentAddress}">Address</span></div>
+            </div>
+
+            <div class="card-footer">
+                <div><span class="label">Guardian:</span> <span class="value" th:text="${student.getGuardianName}">Guardian</span></div>
+                <div><span class="label">Contact:</span> <span class="value" th:text="${student.getGuardianContact}">Contact</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+        <!-- Previous Page -->
+        <form th:if="${studentPage.hasPrevious()}" th:action="@{/generate/{id}(id=${schoolId})}" method="get">
+            <input type="hidden" name="page" th:value="${studentPage.number - 1}" />
+            <input type="hidden" name="size" th:value="${studentPage.size}" />
+            <button type="submit">Previous</button>
+        </form>
+
+        <!-- Next Page -->
+        <form th:if="${studentPage.hasNext()}" th:action="@{/generate/{id}(id=${schoolId})}" method="get">
+            <input type="hidden" name="page" th:value="${studentPage.number + 1}" />
+            <input type="hidden" name="size" th:value="${studentPage.size}" />
+            <button type="submit">Next</button>
+        </form>
+    </div>
+    <div class="text-center my-3">
+        <button class="btn btn-success" onclick="downloadIDs()">Download as JPG</button>
+    </div>
+
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    function downloadIDs() {
+        const cardContainer = document.querySelector('.card-container');
+
+        html2canvas(cardContainer, {
+            scale: 2, // Higher quality
+            useCORS: true // Allows external images if needed
+        }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'student-id-cards.jpg';
+            link.href = canvas.toDataURL('image/jpeg');
+            link.click();
+        });
+    }
+</script>
+
+</html>

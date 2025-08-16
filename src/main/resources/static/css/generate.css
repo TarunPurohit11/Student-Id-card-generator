@@ -1,0 +1,101 @@
+body {
+            background-color: #f5f7fa;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            padding: 40px 20px;
+        }
+
+        .id-card {
+            width: 360px;
+            border: 1px solid #dee2e6;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .id-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .photo-section {
+            text-align: center;
+            padding: 16px;
+        }
+
+        .photo-section img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #2c3e50;
+        }
+
+        .info-section {
+            padding: 0 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .info-section span.label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .info-section span.value {
+            color: #555;
+        }
+
+        .card-footer {
+            background-color: #f8f9fa;
+            padding: 12px 20px;
+            border-top: 1px solid #dee2e6;
+            font-size: 14px;
+        }
+
+        .pagination {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .pagination form {
+            display: inline-block;
+        }
+
+        .pagination button {
+            padding: 8px 18px;
+            margin: 0 8px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: none;
+            background-color: #2c3e50;
+            color: #ffffff;
+            transition: background-color 0.2s;
+        }
+
+        .pagination button:hover {
+            background-color: #1a252f;
+        }
+
+        @media (max-width: 768px) {
+            .id-card {
+                width: 100%;
+                max-width: 360px;
+            }
+        }

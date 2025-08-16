@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>School Registration</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+</head>
+
+<body>
+
+<!-- Alert Message Container -->
+<div class="alert-container">
+    <div class="alert alert-success alert-dismissible fade show" role="alert"
+         th:if="${success}" th:text="${success}" id="successAlert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert"
+         th:if="${error}" th:text="${error}" id="errorAlert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="registration-card">
+        <h3 class="text-center mb-4">Register Your School</h3>
+
+        <form th:action="@{/register}" th:object="${school}" method="post" enctype="multipart/form-data"
+              id="registrationForm">
+            <div class="mb-3">
+                <label for="schoolName" class="form-label">School Name</label>
+                <input type="text" th:field="*{schoolName}" class="form-control" id="schoolName"
+                       placeholder="Enter school name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="schoolEmail" class="form-label">Email</label>
+                <input type="email" th:field="*{schoolEmail}" class="form-control" id="schoolEmail"
+                       placeholder="Enter school email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" th:field="*{password}" class="form-control" id="password"
+                       placeholder="Create a password" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="schoolPhoneNo" class="form-label">Phone Number</label>
+                <input type="text" th:field="*{schoolPhoneNo}" class="form-control" id="schoolPhoneNo"
+                       placeholder="Enter phone number" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="schoolAddress" class="form-label">Address</label>
+                <textarea th:field="*{schoolAddress}" class="form-control" id="schoolAddress" rows="3"
+                          placeholder="Enter address" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">School Logo</label>
+                <input type="file" name="image" class="form-control" id="image" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a th:href="@{/loginPage}" class="btn btn-link">Already have an account? Login</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap & Auto-hide Script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const successAlert = document.getElementById('successAlert');
+        const errorAlert = document.getElementById('errorAlert');
+
+        // Function to hide and remove alert smoothly
+        const autoHideAlert = (alertElement) => {
+            setTimeout(() => {
+                if (alertElement) {
+                    // Add fade out class
+                    alertElement.classList.remove('show');
+                    alertElement.classList.add('fade');
+
+                    // Wait for animation, then remove from DOM
+                    setTimeout(() => {
+                        alertElement.remove();
+                    }, 500); // Bootstrap fade transition time
+                }
+            }, 5000);
+        };
+
+        // Auto-hide alerts
+        if (successAlert) autoHideAlert(successAlert);
+        if (errorAlert) autoHideAlert(errorAlert);
+
+        // Clear form if registration was successful
+        if (successAlert) {
+            const form = document.getElementById('registrationForm');
+            form.reset();
+            document.getElementById('image').value = ''; // clear file input manually
+        }
+    });
+</script>
+
+
+</body>
+</html>
